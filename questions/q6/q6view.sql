@@ -1,5 +1,11 @@
--- Louis DUBAN SI3 FISE
--- 6. Quels trains peuvent être réaffectés pour couvrir une panne sur une autre ligne ?
+/* Louis DUBAN SI3 FISE 
+
+6. Quels trains peuvent être réaffectés pour couvrir une panne sur une autre ligne ?
+
+   Cette requête identifie les trains en circulation subissant une panne critique (niveau de risque ≥ 2),
+   ainsi que les trains disponibles pouvant les remplacer dans les gares du trajet impacté.
+*/
+
 WITH Train_en_panne AS (
     -- Identifier les trains en circulation (ayant un trajet actuel) et étant en panne avec un niveau de risque supérieur à 2.
     SELECT DISTINCT t.id_train AS id_train_panne, t.trajet_actuel
@@ -25,7 +31,7 @@ Trains_Disponibles AS (
     SELECT t.id_train AS id_train_dispo, t.gare_actuelle, gi.trajet_actuel
     FROM TRAIN t
     JOIN Gares_Impactees gi ON t.gare_actuelle = gi.id_gare
-	-- Sous requête
+	-- Sous requête qui vérifie que le train disponible ne subit aucun incident non résolu
     WHERE NOT EXISTS (
         SELECT 1 FROM INCIDENT_TRAIN it
         JOIN INCIDENT i ON it.id_incident = i.id_incident

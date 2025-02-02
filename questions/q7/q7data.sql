@@ -1,11 +1,15 @@
 -- Louis DUBAN SI3 FISE
--- Quels trains peuvent être réaffectés pour couvrir une panne sur une autre ligne ?
+-- 7. Quels incidents ont le plus grand impact sur la ponctualité globale du réseau ferroviaire ?
 
 INSERT INTO type_train (id_type_train, nom, capacite_max, vitesse_max) VALUES 
 (1, 'TER', 10, 120),
 (2, 'TGV', 15, 370);
 
 INSERT INTO type_gare (id_type_gare, nom) VALUES (1, 'gare voyageur');
+
+INSERT INTO type_wagon (id_type_wagon, nom) VALUES 
+(1, 'Locomotive'),
+(2, 'Voyageur');
 
 -- Insertion de 4 gares
 INSERT INTO gare (id_gare, nom, adresse, id_type_gare) VALUES 
@@ -42,11 +46,20 @@ INSERT INTO train (id_train, heures_fonctionnement, gare_actuelle, id_type_train
 (8, 1000, 4, 1, NULL, NULL),
 (9,  800, 2, 1, NULL, NULL);
 
+-- Insertion des wagons
+INSERT INTO wagon(id_wagon, capacite_max, num_voiture, id_type_wagon, id_train) VALUES 
+(1, 50, 1, 1, 1),
+(2, 100, 2, 2, 1),
+(3, 100, 3, 2, 2),
+(4, 50, 1, 1, 3);
+
 -- Insertion des types d'incidents
 INSERT INTO type_incident (id_type_incident, nom) VALUES 
-(1, 'ampoule grillée'),
-(2, 'roues endommagées'),
-(3, 'déraillage');
+(1, 'Ampoule grillée'),
+(2, 'Roues endommagées'),
+(3, 'Caténaire défectueux'),
+(4, 'Panne moteur'),
+(5, 'Freins défectueux');
 
 -- Insertion des niveaux de risque différents (de 1 à 3)
 INSERT INTO niveau_risque (id_niveau_risque, nom, niveau) VALUES 
@@ -55,28 +68,43 @@ INSERT INTO niveau_risque (id_niveau_risque, nom, niveau) VALUES
 (3, 'important', 3);
 
 -- Insertion des incidents
+-- Permet de tester q7view.sql de manière unitaire
 INSERT INTO incident (id_incident, date_incident, retard, cout, resolu, id_type_incident, id_niveau_risque, id_gare) VALUES 
-(1, '2025-01-27 16:30:12', '00:00:00', 10, false, 1, 1, NULL),
-(2, '2025-01-27 16:32:50', '00:25:00', 10, false, 2, 2, NULL),
-(3, '2025-01-27 16:36:50', '02:15:00', 10, false, 3, 3, NULL),
-(4, '2025-01-28 16:30:12', '00:00:00', 10, false, 1, 1, NULL),
-(5, '2025-01-28 16:32:50', '00:20:00', 10, false, 2, 2, NULL),
-(6, '2025-01-30 16:36:50', '02:45:00', 10, false, 3, 3, NULL),
-(7, '2025-01-27 16:40:50', '00:25:00', 10, false, 2, 2, NULL),
-(8, '2025-01-27 15:27:50', '02:45:00', 10, false, 3, 3, NULL),
-(9, '2025-01-27 15:27:50', '02:45:00', 10,  true, 3, 3, NULL);
+(10, '2025-02-01 10:00:00', '01:00:00', 50, false, 4, 2, NULL),
+(11, '2025-02-02 11:15:00', '03:30:00', 200, false, 5, 3, NULL),
+(12, '2025-02-01 10:00:00', '00:00:00', 1, true, 1, 1, NULL),
+(13, '2025-05-01 10:30:00', '10:00:00', 1000, false, 3, 3, NULL),
+(14, '2025-06-01 11:00:00', '05:30:00', 1000, true, 3, 3, NULL),
+(15, '2025-02-03 09:00:00', '01:00:00', 50, false, 4, 2, NULL),
+(16, '2025-02-20 10:00:00', '01:00:00', 50, true, 4, 2, NULL),
+(17, '2025-02-01 06:00:00', '03:00:00', 1, true, 1, 1, 1);
 
 -- Insertion des associations entre trains et incidents
--- Permet de tester q6view.sql de manière unitaire
+-- Permet de tester q7view.sql de manière unitaire
 INSERT INTO INCIDENT_TRAIN (id_train, id_incident) VALUES 
-(1, 2), -- Train 1 impacté par un incident niveau 2 non résolu
-(3, 9), -- Train 3 impacté par un incident niveau 3 résolu
-(4, 9), -- Train 4 impacté par un incident niveau 1 non résolu
-(4, 8), -- Train 4 impacté par un incident niveau 3 non résolu
-(6, 8), -- Train 6 impacté par un incident niveau 3 non résolu
-(5, 9); -- Train 5 impacté par un incident niveau 3 résolu
+(1, 10),
+(2, 11),
+(2, 15),
+(1, 16);
+
+-- Insertion des associations entre trains et incidents
+-- Permet de tester q7view.sql de manière unitaire
+INSERT INTO INCIDENT_TRAJET (id_trajet, id_incident) VALUES 
+(2,13),
+(5,13),
+(7,14),
+(8,14);
+
+-- Insertion des associations entre trains et incidents
+-- Permet de tester q7view.sql de manière unitaire
+INSERT INTO INCIDENT_WAGON (id_wagon, id_incident) VALUES 
+(1, 12),
+(3, 12),
+(4, 12),
+(1, 10),
+(4, 11),
+(3, 15),
+(2, 16);
 
 
 
-
- 
