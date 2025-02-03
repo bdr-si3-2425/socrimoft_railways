@@ -1,5 +1,11 @@
--- Louis DUBAN SI3 FISE
--- Quels trains peuvent être réaffectés pour couvrir une panne sur une autre ligne ?
+/* Louis DUBAN SI3 FISE
+
+6. Quels trains peuvent être réaffectés pour couvrir une panne sur une autre ligne ?
+
+Description : Insère les données nécessaires avant d'exécuter q6requete.sql
+
+Si l'exécution ne fonctionne pas, lancer clear.sql situé dans le dossier antérieur "questions".
+*/
 
 INSERT INTO type_train (id_type_train, nom, capacite_max, vitesse_max) VALUES 
 (1, 'TER', 10, 120),

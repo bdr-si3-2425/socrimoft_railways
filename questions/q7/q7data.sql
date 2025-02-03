@@ -1,5 +1,11 @@
--- Louis DUBAN SI3 FISE
--- 7. Quels incidents ont le plus grand impact sur la ponctualité globale du réseau ferroviaire ?
+/* Louis DUBAN SI3 FISE
+
+7. Quels incidents ont le plus grand impact sur la ponctualité globale du réseau ferroviaire ?
+
+Description : Insère les données nécessaires avant d'exécuter q7requete.sql
+
+Si l'exécution ne fonctionne pas, lancer clear.sql situé dans le dossier antérieur "questions".
+*/
 
 INSERT INTO type_train (id_type_train, nom, capacite_max, vitesse_max) VALUES 
 (1, 'TER', 10, 120),
