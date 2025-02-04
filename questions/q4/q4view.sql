@@ -129,14 +129,14 @@ BEGIN
     )
 
     SELECT 
-        chemin_trajets,
-        nb_correspondances,
-        temps_attente_total
-    FROM paths
-    WHERE gare_arrive = trouver_chemin_optimal.gare_arrive
+        p.chemin_trajets,
+        p.nb_correspondances,
+        p.temps_attente_total
+    FROM paths p
+    WHERE p.gare_arrive = trouver_chemin_optimal.gare_arrive
     ORDER BY 
-        nb_correspondances,
-        temps_attente_total
+        p.nb_correspondances,
+        p.temps_attente_total
     LIMIT 1;
 END;
 $$ LANGUAGE plpgsql;
