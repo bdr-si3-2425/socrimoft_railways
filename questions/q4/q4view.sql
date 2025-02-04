@@ -1,3 +1,4 @@
+--Author: Dorian REYNIER
 -- Créer la nouvelle ligne
 DROP FUNCTION IF EXISTS ajouter_ligne(VARCHAR);
 DROP FUNCTION IF EXISTS ajouter_INSTANCE_LIGNE(INTEGER);
