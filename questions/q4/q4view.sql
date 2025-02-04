@@ -136,7 +136,7 @@ BEGIN
     ORDER BY 
         nb_correspondances,
         temps_attente_total
-    LIMIT 1; -- Pour ne renvoyer que le meilleur chemin
+    LIMIT 1;
 END;
 $$ LANGUAGE plpgsql;
 
