@@ -4,8 +4,8 @@
 
    Pour répondre à cette question, trois approches différentes sont utilisées :
    - Approche 1 : Identification des types d’incidents causant le plus de retard cumulé.
-   - Approche 2 : Analyse du retard moyen par incident pour mesurer leur impact individuel.
-   - Approche 3 : Étude de l’impact des incidents par ligne ferroviaire.
+   - Approche 2 : Analyse du retard moyen par incident pour mesurer leur impact par infrastructure.
+   - Approche 3 : Étude des incidents les plus récurrents impactant les trains.
 
    Ces requêtes offrent une vue d’ensemble sur les incidents les plus perturbateurs sur la ponctualité du réseau ferroviaire. 
 
