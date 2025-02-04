@@ -9,7 +9,7 @@
 
    Ces requêtes offrent une vue d’ensemble sur les incidents les plus perturbateurs sur la ponctualité du réseau ferroviaire. 
 
-   Veuillez d'abord exécuter q6data.sql situé dans le même dossier.
+   Pour les tests unitaires : veuillez d'abord exécuter q6data.sql situé dans le même dossier.
  */
 
 -- Approche 1 : Classement des types d'incidents par retard total

@@ -5,7 +5,7 @@
    Cette requête identifie les trains en circulation subissant une panne critique (niveau de risque ≥ 2),
    ainsi que les trains disponibles pouvant les remplacer dans les gares du trajet impacté.
 
-   Veuillez d'abord exécuter q6data.sql situé dans le même dossier.
+   Pour les tests unitaires : Veuillez d'abord exécuter q6data.sql situé dans le même dossier.
 */
 
 WITH Train_en_panne AS (
