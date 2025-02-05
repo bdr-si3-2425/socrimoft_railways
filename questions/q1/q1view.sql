@@ -1,4 +1,9 @@
+-- =========================================================
+-- REQUÊTE RÉCURSIVE POUR CHERCHER UN TRAJET OPTIMAL
+-- =========================================================
+
 WITH RECURSIVE paths AS (
+    -- Point de départ : on récupère tous les trajets qui commencent à la gare 1
     SELECT 
         t.id_trajet,
         hl.id_instance_ligne,
@@ -16,6 +21,7 @@ WITH RECURSIVE paths AS (
     
     UNION ALL
     
+    -- Récursion : étendre les trajets en ajoutant les correspondances possibles
     SELECT 
         t_arrive.id_trajet,
         hl_next.id_instance_ligne,
@@ -40,6 +46,7 @@ WITH RECURSIVE paths AS (
         AND NOT t_arrive.id_trajet = ANY(p.chemin_trajets)
 )
 
+-- Sélection des trajets atteignant la gare 4 (Ouest), triés par nombre de correspondances et temps d'attente
 SELECT 
     chemin_trajets,
     nb_correspondances,

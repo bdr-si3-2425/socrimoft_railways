@@ -1,8 +1,14 @@
+-- =========================================================
+-- SCRIPT DE DONNÉES POUR TESTER LES REQUÊTES DE TRAJETS
+-- =========================================================
+
+-- Définition des types de gare
 INSERT INTO TYPE_GARE (id_type_gare, nom) VALUES
 (1, 'Grande Ligne'),
 (2, 'Régionale'),
 (3, 'Banlieue');
 
+-- Définition des gares
 INSERT INTO GARE (id_gare, nom, adresse, id_type_gare) VALUES
 (1, 'Gare Nord', 'Place de la Gare 1', 1),
 (2, 'Gare Centrale', 'Avenue Centrale 5', 1),
@@ -10,6 +16,7 @@ INSERT INTO GARE (id_gare, nom, adresse, id_type_gare) VALUES
 (4, 'Gare Ouest', 'Boulevard Ouest 15', 2),
 (5, 'Gare Sud', 'Quai Sud 20', 3);
 
+-- Définition des quais dans chaque gare
 INSERT INTO QUAI (id_quai, nom, id_gare) VALUES
 (1, 'Voie 1', 1),
 (2, 'Voie 2', 1),
@@ -19,6 +26,7 @@ INSERT INTO QUAI (id_quai, nom, id_gare) VALUES
 (6, 'Quai 2', 4),
 (7, 'Quai Unique', 5);
 
+-- Équipements disponibles dans certaines gares
 INSERT INTO EQUIPEMENT_GARE (id_equipement_gare, nom) VALUES
 (1, 'Guichets'),
 (2, 'Distributeurs'),
@@ -31,6 +39,7 @@ INSERT INTO EQUIPER_GARE (id_gare, id_equipement_gare) VALUES
 (4, 2),
 (5, 2);
 
+-- Définition des trajets entre les gares
 INSERT INTO TRAJET (id_trajet, gare_depart, gare_arrive) VALUES
 (1, 1, 2), -- Nord -> Centrale
 (2, 2, 3), -- Centrale -> Est
@@ -39,14 +48,17 @@ INSERT INTO TRAJET (id_trajet, gare_depart, gare_arrive) VALUES
 (5, 1, 4), -- Nord -> Ouest (direct)
 (6, 4, 5); -- Ouest -> Sud
 
+-- Définition des lignes ferroviaires
 INSERT INTO LIGNE (id_ligne, nom) VALUES
 (1, 'Ligne Principale'),
 (2, 'Ligne Secondaire');
 
+-- Instances des lignes ferroviaires
 INSERT INTO INSTANCE_LIGNE (id_instance_ligne, id_ligne) VALUES
 (1, 1),
 (2, 2);
 
+-- Horaires des trajets pour chaque ligne
 INSERT INTO HORAIRE_LIGNE (id_instance_ligne, id_trajet, horaire_depart, horaire_arrive) VALUES
 (1, 1, '08:00:00', '08:30:00'),  -- Nord -> Centrale
 (1, 2, '08:35:00', '09:05:00'),  -- Centrale -> Est
@@ -57,10 +69,12 @@ INSERT INTO HORAIRE_LIGNE (id_instance_ligne, id_trajet, horaire_depart, horaire
 (2, 4, '09:15:00', '09:45:00'),  -- Est -> Ouest
 (2, 6, '09:50:00', '10:20:00');  -- Ouest -> Sud
 
+-- Définition des types de train
 INSERT INTO TYPE_TRAIN (id_type_train, nom, capacite_max, vitesse_max) VALUES
 (1, 'TGV', 500, 300),
 (2, 'TER', 200, 160);
 
+-- Définition des trains et leur état actuel
 INSERT INTO TRAIN (id_train, heures_fonctionnement, gare_actuelle, id_type_train, trajet_actuel, ligne_habituelle) VALUES
 (1, 1500, 1, 1, 1, 1),
 (2, 800, 2, 2, 3, 2);
