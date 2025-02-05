@@ -1,11 +1,16 @@
+-- ================================
+-- REQUÊTE RÉCURSIVE POUR CHERCHER UN TRAJET OPTIMAL EN CAS D'INCIDENT
+-- ================================
 WITH RECURSIVE 
 trajets_incidentes AS (
+    -- Sélection des trajets affectés par un incident spécifique
     SELECT t.id_trajet
     FROM INCIDENT_TRAJET it
     JOIN TRAJET t ON it.id_trajet = t.id_trajet
     WHERE it.id_incident = 1
 ),
 paths AS (
+    -- Étape initiale : rechercher les trajets disponibles depuis la gare de départ
     SELECT 
         t.id_trajet,
         t.gare_depart,
@@ -24,6 +29,7 @@ paths AS (
     
     UNION ALL
     
+    -- Étape récursive : étendre les chemins en évitant les trajets incidentés
     SELECT 
         t_arrive.id_trajet,
         t_arrive.gare_depart,
@@ -43,6 +49,7 @@ paths AS (
         AND t_arrive.id_trajet <> ALL(p.chemin)
 )
 
+-- Sélection des itinéraires viables pour la destination cible
 SELECT 
     chemin AS "Trajet alternatif",
     correspondances AS "Nb correspondances",
